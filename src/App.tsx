@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Stage, Layer, Image, Circle } from "react-konva";
 import useImage from "use-image";
 import "./App.css";
@@ -7,32 +7,14 @@ function App() {
   const [image] = useImage("../public/img/monkey.png");
   const imageRef = useRef(null);
 
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = event => {
-    setMousePosition({
-      x: event.clientX,
-      y: event.clientY,
-    });
-  };
-
-  useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove);
-    console.log(mousePosition);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, [mousePosition]);
-
   const allowedPoints = [
-    { x: 995, y: 954 },
-    { x: 838, y: 860 },
-    { x: 869, y: 660 },
-    { x: 1027, y: 550 },
-    { x: 875, y: 436 },
-    { x: 956, y: 370 },
-    { x: 998, y: 212 },
+    { x: 995, y: 964 },
+    { x: 838, y: 880 },
+    { x: 869, y: 676 },
+    { x: 1027, y: 564 },
+    { x: 876, y: 453 },
+    { x: 955, y: 388 },
+    { x: 998, y: 229 },
   ];
 
   const getClosestPoint = (clickX, clickY) => {
@@ -40,7 +22,7 @@ function App() {
       const distance = Math.sqrt(
         (clickX - point.x) ** 2 + (clickY - point.y) ** 2,
       );
-      return distance <= 20;
+      return distance <= 50;
     });
   };
 
@@ -60,14 +42,10 @@ function App() {
 
   return (
     <div className="background">
-      <p>
-        X: {mousePosition.x}, Y: {mousePosition.y}
-      </p>
       <Stage
         width={window.innerWidth}
         height={window.innerHeight}
         onClick={handleStageClick}
-        style={{ border: "2px solid black" }}
       >
         <Layer>
           {allowedPoints.map((point, index) => (
@@ -76,8 +54,8 @@ function App() {
 
           <Image
             image={image}
-            x={allowedPoints[0].x}
-            y={allowedPoints[0].y}
+            x={allowedPoints[0].x - 20}
+            y={allowedPoints[0].y - 20}
             width={40}
             height={40}
             ref={imageRef}
