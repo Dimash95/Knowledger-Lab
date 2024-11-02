@@ -1,8 +1,10 @@
-.background {
-  background-image: url("../public/img/background.jpg");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  height: 100vh;
-  color: red;
-}
+/* @media (max-width: 375px) { */
+  .background {
+    background-image: url("../public/img/background.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 100vh;
+    color: red;
+  }
+/* } */
